@@ -1,0 +1,11 @@
+import { Router } from 'express';
+import { Cart, CartItem, Product } from '../models/index.js';
+import { protect } from '../middleware/auth.js';
+const router = Router();
+const getCart = async (userId) => { let cart = await Cart.findOne({ userId }); if (!cart) cart = await Cart.create({ userId }); const items = await CartItem.find({ cartId: cart.id }).populate('productId'); return { ...cart.toJSON(), CartItems: items.map(item => ({ ...item.toJSON(), Product: item.productId })) }; };
+router.get('/', protect, async (req, res) => res.json({ success: true, data: await getCart(req.user.id) }));
+router.post('/', protect, async (req, res) => { const product = await Product.findById(req.body.productId); const quantity = Number(req.body.quantity || 1); if (!product) return res.status(404).json({ success: false, message: 'Product not found' }); if (product.stock < quantity) return res.status(400).json({ success: false, message: 'Insufficient stock' }); const cart = await Cart.findOneAndUpdate({ userId: req.user.id }, { userId: req.user.id }, { upsert: true, new: true }); await CartItem.findOneAndUpdate({ cartId: cart.id, productId: product.id }, { $inc: { quantity }, price: product.price }, { upsert: true, new: true }); res.status(201).json({ success: true, data: await getCart(req.user.id) }); });
+router.put('/:itemId', protect, async (req, res) => { const item = await CartItem.findByIdAndUpdate(req.params.itemId, { quantity: Math.max(1, Number(req.body.quantity)) }, { new: true }); if (!item) return res.status(404).json({ success: false, message: 'Cart item not found' }); res.json({ success: true, data: await getCart(req.user.id) }); });
+router.delete('/:itemId', protect, async (req, res) => { await CartItem.findByIdAndDelete(req.params.itemId); res.json({ success: true, data: await getCart(req.user.id) }); });
+router.delete('/', protect, async (req, res) => { const cart = await Cart.findOne({ userId: req.user.id }); if (cart) await CartItem.deleteMany({ cartId: cart.id }); res.json({ success: true, message: 'Cart cleared' }); });
+export default router;

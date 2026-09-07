@@ -1,0 +1,2 @@
+-- MongoDB creates collections from the Mongoose models at runtime.
+-- Set MONGODB_URI in server/.env, then run: npm run seed --prefix server

@@ -1,0 +1,123 @@
+.auth-panel > * {
+  animation: auth-rise 650ms cubic-bezier(.2,.75,.25,1) both;
+}
+
+.auth-panel > *:nth-child(2) { animation-delay: 80ms; }
+.auth-panel > *:nth-child(3) { animation-delay: 140ms; }
+.auth-panel > form { animation-delay: 220ms; }
+.auth-panel > .security-note { animation-delay: 330ms; }
+.auth-panel > .switch-auth { animation-delay: 400ms; }
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 48px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  color: #75807b;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.password-toggle:hover {
+  color: #172021;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.strength {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #75807b;
+  font-size: 11px;
+  letter-spacing: .02em;
+}
+
+.strength-bars {
+  display: flex;
+  flex: 1;
+  gap: 4px;
+}
+
+.strength-bars span {
+  height: 4px;
+  flex: 1;
+  background: #dce0da;
+  transition: background-color 240ms ease, transform 240ms ease;
+}
+
+.strength-bars span[class] {
+  animation: strength-pop 260ms ease both;
+}
+
+.strength-1 { background: #d36a54 !important; }
+.strength-2 { background: #d39b54 !important; }
+.strength-3,
+.strength-4 { background: #8ca44c !important; }
+
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 13px 14px;
+  border: 1px solid #dce2d8;
+  background: rgba(231, 235, 227, .56);
+  color: #708077;
+}
+
+.security-note > svg:first-child {
+  color: #819a3d;
+  flex: 0 0 auto;
+}
+
+.security-note > svg:last-child {
+  margin-left: auto;
+  color: #a3ada6;
+  flex: 0 0 auto;
+}
+
+.security-note span {
+  display: grid;
+  gap: 2px;
+}
+
+.security-note strong {
+  color: #34423d;
+  font: 500 12px 'Space Grotesk';
+}
+
+.security-note small {
+  font-size: 11px;
+}
+
+@keyframes auth-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes strength-pop {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+@media (max-width: 480px) {
+  .security-note small { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-panel > *, .strength-bars span[class] { animation: none; }
+}

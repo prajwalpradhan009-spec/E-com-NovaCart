@@ -1,0 +1,26 @@
+.brand img {
+  display: block;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.header .brand span {
+  display: inline;
+}
+
+.footer .brand img {
+  width: 30px;
+  height: 30px;
+}
+
+.header .brand {
+  line-height: 0;
+}
+
+@media (max-width: 760px) {
+  .brand img {
+    width: 34px;
+    height: 34px;
+  }
+}
