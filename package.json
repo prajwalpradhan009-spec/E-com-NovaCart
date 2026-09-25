@@ -1,12 +1,18 @@
 {
   "name": "novacart",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
+  "description": "NOVA CART — premium full-stack e-commerce application",
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
-    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
-    "build": "npm run build --prefix client",
-    "start": "npm run start --prefix server"
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "dev": "concurrently -n server,client -c blue,green \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "seed": "npm --prefix server run seed"
   },
-  "devDependencies": { "concurrently": "^9.1.2" }
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
 }

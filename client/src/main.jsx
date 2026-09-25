@@ -1,4 +1,12 @@
-import { StrictMode } from 'react'; import { createRoot } from 'react-dom/client'; import { BrowserRouter, Routes, Route } from 'react-router-dom'; import { AuthProvider } from './context/AuthContext'; import Header from './components/Header'; import Home from './pages/Home'; import Products from './pages/Products'; import ProductDetail from './pages/ProductDetail'; import Auth from './pages/Auth'; import Cart from './pages/Cart'; import './styles.css'; import './logo.css'; import './motion.css'; import './auth-motion.css';
-function Placeholder({ title }) { return <main className="empty page container"><p className="eyebrow">NovaCart</p><h1>{title}</h1><p>This area is ready for your account and order workflow.</p><a className="button button-dark" href="/products">Keep exploring</a></main>; }
-function App() { return <AuthProvider><Header /><Routes><Route path="/" element={<Home />} /><Route path="/products" element={<Products />} /><Route path="/products/:id" element={<ProductDetail />} /><Route path="/login" element={<Auth />} /><Route path="/register" element={<Auth register />} /><Route path="/cart" element={<Cart />} /><Route path="/checkout" element={<Placeholder title="Checkout" />} /><Route path="/orders" element={<Placeholder title="Your orders" />} /><Route path="/profile" element={<Placeholder title="Your profile" />} /><Route path="*" element={<Placeholder title="Page not found" />} /></Routes><footer className="footer"><div className="container footer-inner"><span className="brand"><img src="/novacart-mark.svg" alt="NovaCart" /><span>NovaCart</span></span><span>Shop smart. Live better.</span><span>© 2026 NovaCart</span></div></footer></AuthProvider>; }
-createRoot(document.getElementById('root')).render(<StrictMode><BrowserRouter><App /></BrowserRouter></StrictMode>);
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+
+document.documentElement.classList.add("reveal-ready");
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
