@@ -1,6 +1,6 @@
 # NovaCart
 
-NovaCart is a full-stack ecommerce platform for browsing products, managing a cart, placing orders, and administering a store. It includes a responsive storefront, customer accounts, wishlist, reviews, checkout, and an admin dashboard.
+NovaCart is a full-stack e-commerce platform built with React, Node.js, Express, and MongoDB. It provides product browsing, authentication, shopping cart management, wishlists, reviews, orders, categories, and secure user accounts.
 
 ## Tech stack
 
